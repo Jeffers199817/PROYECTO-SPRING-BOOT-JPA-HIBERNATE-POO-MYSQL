@@ -34,11 +34,29 @@ public class PersonaController {
 
     //Endpoint para eliminar
 
-    @GetMapping("persona/eliminar")
+    @DeleteMapping("persona/eliminar")
     public String deletePersona(@RequestParam Long id){
 
         personaService.eliminarPersona(id);
         return "Persona eliminada correctamente";
+    }
+
+    //Endpoint para editar una persona
+
+    @PutMapping("persona/editar/{id}")
+    public Persona updatePersona(@PathVariable Long id_original,
+                                @RequestParam(required = false, name="id") Long nuevoId,
+                                @RequestParam(required = false, name= "nombre") String nuevoNombre,
+                                 @RequestParam(required = false, name="apellido")String nuevoApellido,
+                                 @RequestParam(required = false, name = "edad") int nuevaEdad){
+
+        personaService.editPersona(id_original,nuevoId,nuevoNombre,nuevoApellido,nuevaEdad);
+
+        Persona persona = personaService.findPersona(id_original);
+
+        return persona;
+
+
     }
 
 
