@@ -32,6 +32,15 @@ public class PersonaController {
         return "Persona creada correctamente";
     }
 
+    //Endpoint para eliminar
+
+    @GetMapping("persona/eliminar")
+    public String deletePersona(@RequestParam Long id){
+
+        personaService.eliminarPersona(id);
+        return "Persona eliminada correctamente";
+    }
+
 
 
 
