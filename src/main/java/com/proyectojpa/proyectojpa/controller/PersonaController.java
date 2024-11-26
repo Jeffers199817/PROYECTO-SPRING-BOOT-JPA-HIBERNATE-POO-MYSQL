@@ -43,12 +43,12 @@ public class PersonaController {
 
     //Endpoint para editar una persona
 
-    @PutMapping("persona/editar/{id}")
-    public Persona updatePersona(@PathVariable Long id_original,
+    @PutMapping("/persona/editar/{id_original}")
+    public Persona updatePersona(@PathVariable("id_original") Long id_original,
                                 @RequestParam(required = false, name="id") Long nuevoId,
                                 @RequestParam(required = false, name= "nombre") String nuevoNombre,
                                  @RequestParam(required = false, name="apellido")String nuevoApellido,
-                                 @RequestParam(required = false, name = "edad") int nuevaEdad){
+                                 @RequestParam(required = false, name = "edad") Integer nuevaEdad){
 
         personaService.editPersona(id_original,nuevoId,nuevoNombre,nuevoApellido,nuevaEdad);
 
