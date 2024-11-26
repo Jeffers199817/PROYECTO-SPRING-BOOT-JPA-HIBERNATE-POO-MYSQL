@@ -15,16 +15,23 @@ public class PersonaController {
 
     //Endpoint para obtener todas las personas;
 
-    @GetMapping("personas/traer")
+    @GetMapping("/personas/traer")
     public List<Persona> getPersonas(){
 
         return personaService.traerPersonas();
 
     }
 
+    //Endpoint para traer una solo persona
+
+    @GetMapping("/persona/traer")
+    public Persona getPersona(@RequestParam Long id){
+        return personaService.findPersona(id);
+    }
+
     //Endpoint para crear una nueva persona
 
-    @PostMapping("persona/crear")
+    @PostMapping("/persona/crear")
 
     public String createPersona(@RequestBody Persona persona){
 
@@ -34,7 +41,7 @@ public class PersonaController {
 
     //Endpoint para eliminar
 
-    @DeleteMapping("persona/eliminar")
+    @DeleteMapping("/persona/eliminar")
     public String deletePersona(@RequestParam Long id){
 
         personaService.eliminarPersona(id);
@@ -44,19 +51,25 @@ public class PersonaController {
     //Endpoint para editar una persona
 
     @PutMapping("/persona/editar/{id_original}")
-    public Persona updatePersona(@PathVariable("id_original") Long id_original,
-                                @RequestParam(required = false, name="id") Long nuevoId,
-                                @RequestParam(required = false, name= "nombre") String nuevoNombre,
-                                 @RequestParam(required = false, name="apellido")String nuevoApellido,
-                                 @RequestParam(required = false, name = "edad") Integer nuevaEdad){
+    public Persona updatePersona(@PathVariable Long id_original,
+                                 @RequestParam(required = false, name="nuevoId") Long nuevoId,
+                                 @RequestParam(required = false, name="nombre") String nuevoNombre,
+                                 @RequestParam(required = false, name="apellido") String nuevoApellido,
+                                 @RequestParam(required = false, name="edad") int nuevaEdad) {
+
+        System.out.println("El valor de nueva edad es: " + nuevaEdad);
+        // Verificar si nuevaEdad es null antes de usarla
+        System.out.println("Su apellido es: " + nuevoApellido+  "El nombre es: " + nuevoNombre + "El edad es: " + nuevaEdad + "El nuevoId es: " + nuevoId);
 
         personaService.editPersona(id_original,nuevoId,nuevoNombre,nuevoApellido,nuevaEdad);
 
-        Persona persona = personaService.findPersona(id_original);
+
+
+        System.out.println("nuevaEdad es null, por favor proporciona un valor para edad."); // Puedes decidir aquí cómo manejar este caso, por ejemplo, lanzar una excepción o hacer algo predeterminado.
+
+        Persona persona = personaService.findPersona(nuevoId);
 
         return persona;
-
-
     }
 
 
