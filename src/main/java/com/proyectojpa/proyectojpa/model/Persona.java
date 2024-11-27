@@ -16,7 +16,8 @@ public class Persona {
     private int edad;
 
     @OneToOne
-
+    @JoinColumn(name="idmascota",
+                referencedColumnName = "id_mascota")
     private Mascota mascota;
     public Persona(){
 
