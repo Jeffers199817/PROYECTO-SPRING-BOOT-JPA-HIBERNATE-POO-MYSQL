@@ -1,4 +1,7 @@
 package com.proyectojpa.proyectojpa.service;
 
-public class MascotaService {
+public class MascotaService implements IMascotaService{
+
+private IMascotaService iMascotaService;
+
 }
